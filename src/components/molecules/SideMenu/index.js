@@ -23,7 +23,7 @@ const SideMenu = (props) => {
       icon: <Home />,
     },
     {
-      name: "Tipos de profissiona",
+      name: "Tipos de profissional",
       url: "/tipos-de-profissional",
       icon: <AssignmentInd />,
     },

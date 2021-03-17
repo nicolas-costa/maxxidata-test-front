@@ -6,13 +6,8 @@ export default class Table extends Component {
     super();
   }
 
-  state = {
-    rows: [],
-  };
-
   render() {
-    const { columns } = this.props;
-    const { rows } = this.state;
+    const { columns, rows = [] } = this.props;
 
     return (
       <div style={{ height: 400, width: "100%", marginTop: 30 }}>

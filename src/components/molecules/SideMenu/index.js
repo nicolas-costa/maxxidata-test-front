@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Drawer,
     List,
     ListItem,
     ListItemText,
     ListItemIcon,
+    Divider,
     Hidden
 } from '@material-ui/core';
-import Profissionais from "../../../pages/professional";
 import {Link} from 'react-router-dom';
 import {
     Work,
@@ -19,6 +19,7 @@ import styles from './styles';
 
 const SideMenu = (props) => {
     const classes = styles();
+    const { open, toggle } = props;
 
     const items = [
         {
@@ -36,13 +37,10 @@ const SideMenu = (props) => {
             url: 'profissionais',
             icon: <Work/>
         },
-        // You can add more items by passing an array of objects like those above
+        // You can add more items by passing an array of objects like these above
         ...(props.items ? props.items && Array.isArray(props.items) : [])
     ]
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleToggle = () => setIsOpen(!isOpen);
 
     const renderIcon = (icon) => {
         if(icon) {
@@ -54,37 +52,47 @@ const SideMenu = (props) => {
         }
     };
 
+    const renderList = () => {
+        return (
+            <>
+                <div className={classes.toolbar} />
+                <Divider />
+                <List>
+                    {items.map((item, index) => (
+                        <ListItem button to={item.url} component={Link} key={index}>
+                            {renderIcon(item.icon)}
+                            <ListItemText primary={item.name} />
+                        </ListItem>))}
+                </List>
+            </>
+        );
+    };
+
     return (
         <nav>
             <Hidden xsDown implementation="css">
                 <Drawer
                     className={classes.sidebar}
                     open
+                    classes={{
+                        paper: classes.paper,
+                    }}
                     variant={'permanent'}
                     anchor={"left"}>
-                    <List>
-                        {items.map((item, index) => (
-                            <ListItem button to={item.url} component={Link} key={index}>
-                                {renderIcon(item.icon)}
-                                <ListItemText primary={item.name} />
-                            </ListItem>))}
-                    </List>
+                    {renderList()}
                 </Drawer>
             </Hidden>
             <Hidden smUp implementation="css">
                 <Drawer
                     className={classes.sidebar}
                     variant={'temporary'}
-                    open={isOpen}
-                    onClose={handleToggle}
+                    open={open}
+                    classes={{
+                        paper: classes.paper,
+                    }}
+                    onClose={toggle}
                     anchor={"left"}>
-                    <List>
-                        {items.map((item, index) => (
-                            <ListItem button to={item.url} component={Link}  key={index}>
-                                {renderIcon(item.icon)}
-                                <ListItemText primary={item.name} />
-                            </ListItem>))}
-                    </List>
+                    {renderList()}
                 </Drawer>
             </Hidden>
         </nav>

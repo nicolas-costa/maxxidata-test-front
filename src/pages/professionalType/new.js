@@ -10,15 +10,28 @@ import {
   FormControl,
   FormLabel,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Slide,
 } from "@material-ui/core";
+import { create } from "../../services/professionalType";
 import styles from "./styles";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 class New extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
       descricao: "",
       situacao: true,
+      error: false,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -32,12 +45,36 @@ class New extends Component {
     this.setState({ [name]: value });
   }
 
-  onSubmit(event) {
+  onClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  async onSubmit(event) {
     event.preventDefault();
+    const { state } = this;
+    const response = await create(state);
+
+    this.setState({
+      open: true,
+      error: !response,
+    });
   }
 
+  getDialogMsg = () => {
+    const { error } = this.state;
+    let msg;
+
+    if(error) {
+      msg = 'Houve algum problema ao salvar o tipo de profissional.'
+    } else msg = 'Tipo de profissional adicionado com sucesso.';
+
+    return msg;
+  };
+
   render() {
-    const { descricao, situacao } = this.state;
+    const { descricao, situacao, open } = this.state;
 
     return (
       <Grid container direction={"row"} spacing={4}>
@@ -91,6 +128,28 @@ class New extends Component {
             </form>
           </Paper>
         </Grid>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.onClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            {"Adicionar tipo de profissional"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              {this.getDialogMsg()}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.onClose} color="primary">
+              Ok
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Grid>
     );
   }

@@ -150,7 +150,7 @@ class New extends Component {
                   onChange={this.onChange}
                 >
                   {tiposDeProfissional.map((tipo) => (
-                    <MenuItem value={tipo.id}>{tipo.descricao}</MenuItem>
+                    <MenuItem value={tipo.id} key={tipo.id}>{tipo.descricao}</MenuItem>
                   ))}
                 </Select>
 
@@ -197,7 +197,7 @@ class New extends Component {
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            {"Adicionar tipo de profissional"}
+            {"Adicionar profissional"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">

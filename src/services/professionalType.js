@@ -22,7 +22,6 @@ export const getAll = async () => {
   }
 };
 
-
 /**
  * Cria um novo tipo de profissional.
  *

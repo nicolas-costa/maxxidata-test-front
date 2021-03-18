@@ -66,9 +66,9 @@ class New extends Component {
     const { error } = this.state;
     let msg;
 
-    if(error) {
-      msg = 'Houve algum problema ao salvar o tipo de profissional.'
-    } else msg = 'Tipo de profissional adicionado com sucesso.';
+    if (error) {
+      msg = "Houve algum problema ao salvar o tipo de profissional.";
+    } else msg = "Tipo de profissional adicionado com sucesso.";
 
     return msg;
   };

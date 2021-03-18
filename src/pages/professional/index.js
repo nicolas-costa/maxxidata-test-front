@@ -3,6 +3,7 @@ import { Typography } from "@material-ui/core";
 import Table from "../../components/molecules/Table";
 import Fab from "../../components/atoms/Fab";
 import { getAll } from "../../services/professional";
+import New from "./new";
 import columns from "./columns";
 
 const Professional = (props) => {
@@ -26,3 +27,4 @@ const Professional = (props) => {
 };
 
 export default Professional;
+export { New };

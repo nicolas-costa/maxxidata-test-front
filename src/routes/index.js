@@ -1,7 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 import Home from "../pages/home";
 import Professional from "../pages/professional";
-import ProfessionalType from "../pages/professionalType";
+import ProfessionalType, { New } from "../pages/professionalType";
 
 const Routes = () => {
   return (
@@ -9,6 +9,7 @@ const Routes = () => {
       <Route exact path="/" component={Home} />
       <Route path="/profissionais" component={Professional} />
       <Route path="/tipos-de-profissional" component={ProfessionalType} />
+      <Route path="/novo-tipo-de-profissional" component={New} />
     </Switch>
   );
 };

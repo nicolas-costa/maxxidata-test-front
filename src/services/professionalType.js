@@ -10,7 +10,21 @@ export const getAll = async () => {
 
     if (res.status === 200) {
       return res.data;
-    } else return [];
+    }
+    return [];
+  } catch (e) {
+    return null;
+  }
+};
+
+export const create = async (data) => {
+  try {
+    const res = await api.post(ENDPOINTS.professionalTypes, data);
+
+    if (res.status === 201) {
+      return res.data;
+    }
+    return null;
   } catch (e) {
     return null;
   }

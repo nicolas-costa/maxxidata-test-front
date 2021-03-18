@@ -19,7 +19,7 @@ const ProfessionalType = (props) => {
       headerName: "Situação",
       sortable: false,
       width: 150,
-      valueGetter: (params) => (params.situacao ? "Ativo" : "Inativo"),
+      valueGetter: (params) => (params.row.situacao ? "Ativo" : "Inativo"),
     },
   ];
 
